@@ -7,6 +7,13 @@ yum update –y
 
 yum install -y awslogs ntp java-1.8.0-openjdk-devel docker
 
+set +e
+adduser jenkins
+set -e
+mkdir -p /home/jenkins
+usermod --home /home/jenkins --gid docker jenkins
+chown -R jenkins:docker /home/jenkins
+
 ln -sf /usr/share/zoneinfo/Australia/Sydney /etc/localtime
 chkconfig ntpd on
 
