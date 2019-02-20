@@ -12,7 +12,9 @@ adduser jenkins
 set -e
 mkdir -p /home/jenkins
 usermod --home /home/jenkins --gid docker jenkins
+cp -a /home/ec2/.ssh /home/jenkins/
 chown -R jenkins:docker /home/jenkins
+
 
 ln -sf /usr/share/zoneinfo/Australia/Sydney /etc/localtime
 chkconfig ntpd on
