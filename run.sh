@@ -12,7 +12,7 @@ adduser jenkins
 set -e
 mkdir -p /home/jenkins
 usermod --home /home/jenkins --gid docker jenkins
-cp -a /home/ec2/.ssh /home/jenkins/
+cp -a /home/ec2-user/.ssh /home/jenkins/
 chown -R jenkins:docker /home/jenkins
 
 
