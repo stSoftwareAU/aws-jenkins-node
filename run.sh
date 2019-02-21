@@ -35,3 +35,4 @@ echo "file = /var/log/messages" >> /etc/awslogs/awslogs.conf
 echo "log_stream_name = {instance_id}" >> /etc/awslogs/awslogs.conf
 
 systemctl restart awslogsd.service
+systemctl start docker.service
