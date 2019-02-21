@@ -17,7 +17,8 @@ chown -R jenkins:docker /home/jenkins
 
 
 ln -sf /usr/share/zoneinfo/Australia/Sydney /etc/localtime
-chkconfig ntpd on
+#chkconfig ntpd on
+systemctl enable ntpd.service
 
 # Set up logs
 sed --in-place -E "s/( *region *=)(.*)/\1 ap-southeast-2/" /etc/awslogs/awscli.conf
