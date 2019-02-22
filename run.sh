@@ -4,8 +4,8 @@ set -e
 sed -i -e 's/#root:.*/root: support@stsoftware.com.au/g' /etc/aliases
 
 yum update –y
-
-yum install -y awslogs ntp java-1.8.0-openjdk-devel docker git
+amazon-linux-extras install docker
+yum install -y awslogs ntp java-1.8.0-openjdk-devel git
 
 set +e
 adduser jenkins
