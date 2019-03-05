@@ -8,14 +8,6 @@ amazon-linux-extras enable corretto8
 amazon-linux-extras install docker
 yum install -y awslogs ntp java-1.8.0-amazon-corretto git
 
-# install rake used for codepipeline
-curl -O https://rubygems.org/rubygems/rubygems-3.0.3.tgz
-tar zxf rubygems-3.0.3.tgz
-cd rubygems-3.0.3
-ruby setup.rb --no-format-executable
-gem update
-gem install rake
-
 set +e
 adduser jenkins
 set -e
