@@ -6,7 +6,7 @@ sed -i -e 's/#root:.*/root: support@stsoftware.com.au/g' /etc/aliases
 yum update –y
 amazon-linux-extras enable corretto8
 amazon-linux-extras install docker
-yum install -y awslogs ntp java-1.8.0-amazon-corretto git
+yum install -y awslogs ntp java-1.8.0-amazon-corretto git jq
 
 set +e
 adduser jenkins
