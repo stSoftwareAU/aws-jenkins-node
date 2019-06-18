@@ -35,5 +35,18 @@ echo "datetime_format = %b %d %H:%M:%S" >> /etc/awslogs/awslogs.conf
 echo "file = /var/log/messages" >> /etc/awslogs/awslogs.conf
 echo "log_stream_name = {instance_id}" >> /etc/awslogs/awslogs.conf
 
+# setup ssh key
+mkdir -p /home/jenkins/.ssh
+secret_JS=$(aws secretsmanager get-secret-value --secret-id "common_secrets" --region ap-southeast-2)
+key_pairs_JS=$(jq -r '.SecretString' <<< "${secret_JS}")
+private_key_64=$(jq -r '.github_id_rsa' <<< "${key_pairs_JS}")
+echo "${private_key_64}" | base64 -i --decode | zcat > /home/jenkins/.ssh/id_rsa
+
+known_hosts=$(jq -r '.github_known_hosts' <<< "${key_pairs_JS}")
+echo "${known_hosts}" >> /home/jenkins/.ssh/known_hosts
+
+chown -R jenkins:docker /home/jenkins/.ssh
+chmod 600 /home/jenkins/.ssh/*
+
 systemctl restart awslogsd.service
 systemctl start docker.service
