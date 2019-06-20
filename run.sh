@@ -3,11 +3,6 @@ set -e
 
 sed -i -e 's/#root:.*/root: support@stsoftware.com.au/g' /etc/aliases
 
-yum update –y
-amazon-linux-extras enable corretto8
-amazon-linux-extras install docker
-yum install -y awslogs ntp java-1.8.0-amazon-corretto git jq
-
 set +e
 adduser jenkins
 set -e
@@ -16,6 +11,11 @@ usermod --home /home/jenkins --gid docker jenkins
 runuser -l jenkins /usr/bin/bash -c "/usr/bin/aws configure set default.region ap-southeast-2"
 cp -a /home/ec2-user/.ssh /home/jenkins/
 chown -R jenkins:docker /home/jenkins
+
+yum update –y
+amazon-linux-extras enable corretto8
+amazon-linux-extras install docker
+yum install -y awslogs ntp java-1.8.0-amazon-corretto git jq
 
 ln -sf /usr/share/zoneinfo/Australia/Sydney /etc/localtime
 #chkconfig ntpd on
