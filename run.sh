@@ -18,7 +18,7 @@ chown -R jenkins:docker /home/jenkins
 
 yum update –y
 amazon-linux-extras enable corretto8
-yum install -y awslogs ntp java-1.8.0-amazon-corretto git jq
+yum install -y awslogs ntp java-1.8.0-amazon-corretto git jq postgresql
 
 ln -sf /usr/share/zoneinfo/Australia/Sydney /etc/localtime
 #chkconfig ntpd on
