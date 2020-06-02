@@ -18,10 +18,18 @@ chown -R jenkins:docker /home/jenkins
 
 yum update –y
 amazon-linux-extras enable corretto8
-yum install -y awslogs ntp java-1.8.0-amazon-corretto git jq ant
+yum install -y awslogs ntp java-1.8.0-amazon-corretto git jq
 #install postgres 11.6.1
 yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-libs-11.6-1PGDG.rhel6.x86_64.rpm
 yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-11.6-1PGDG.rhel6.x86_64.rpm
+
+#install apache ant
+mkdir -p /tmp
+cd /tmp
+wget http://apache.mirror.serversaustralia.com.au//ant/binaries/apache-ant-1.9.15-bin.tar.gz
+tar -xzf apache-ant-1.9.15-bin.tar.gz
+rm -rf /tmp/apache-ant
+ln -s apache-ant-1.9.15 apache-ant
 
 ln -sf /usr/share/zoneinfo/Australia/Sydney /etc/localtime
 #chkconfig ntpd on
