@@ -29,6 +29,9 @@ wget http://apache.mirror.serversaustralia.com.au//ant/binaries/apache-ant-1.9.1
 tar -xzf apache-ant-1.9.15-bin.tar.gz
 rm -rf /tmp/apache-ant
 ln -s apache-ant-1.9.15 apache-ant
+#install gwt-2.7.0
+wget http://goo.gl/t7FQSn -O gwt-2.7.0.zip
+unzip gwt-2.7.0.zip
 
 ln -sf /usr/share/zoneinfo/Australia/Sydney /etc/localtime
 #chkconfig ntpd on
