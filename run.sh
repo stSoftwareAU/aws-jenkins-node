@@ -57,9 +57,9 @@ mkdir -p /home/jenkins/.ssh
 secret_JS=$(aws secretsmanager get-secret-value --secret-id "common_secrets" --region ap-southeast-2)
 key_pairs_JS=$(jq -r '.SecretString' <<< "${secret_JS}")
 private_key_64=$(jq -r '.github_id_rsa' <<< "${key_pairs_JS}")
-echo "${private_key_64}" | base64 -i --decode | zcat > /home/jenkins/.ssh/id_rsa
+echo "${private_key_64}" | base64 -i --decode > /home/jenkins/.ssh/id_rsa
 public_key_64=$(jq -r '.github_id_rsa_pub' <<< "${key_pairs_JS}")
-echo "${public_key_64}" | base64 -i --decode | zcat > /home/jenkins/.ssh/id_rsa.pub
+echo "${public_key_64}" | base64 -i --decode > /home/jenkins/.ssh/id_rsa.pub
 
 known_hosts=$(jq -r '.github_known_hosts' <<< "${key_pairs_JS}")
 echo "${known_hosts}" >> /home/jenkins/.ssh/known_hosts
