@@ -69,3 +69,5 @@ chmod 600 /home/jenkins/.ssh/*
 
 systemctl restart awslogsd.service
 systemctl start docker.service
+
+systemctl status docker
