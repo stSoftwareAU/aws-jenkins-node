@@ -47,9 +47,16 @@ echo "use_gzip_http_content_encoding=true" >> /etc/awslogs/awslogs.conf
 
 echo "" >> /etc/awslogs/awslogs.conf
 echo "[/var/log/messages]" >> /etc/awslogs/awslogs.conf
-echo "log_group_name = tp-php_/var/log/messages" >> /etc/awslogs/awslogs.conf
+echo "log_group_name = messages_/var/log/messages" >> /etc/awslogs/awslogs.conf
 echo "datetime_format = %b %d %H:%M:%S" >> /etc/awslogs/awslogs.conf
 echo "file = /var/log/messages" >> /etc/awslogs/awslogs.conf
+echo "log_stream_name = {instance_id}" >> /etc/awslogs/awslogs.conf
+
+echo "" >> /etc/awslogs/awslogs.conf
+echo "[/var/log/cloud-init-output.log]" >> /etc/awslogs/awslogs.conf
+echo "log_group_name = cloud-init-output_/var/log/cloud-init-output.log" >> /etc/awslogs/awslogs.conf
+echo "datetime_format = %b %d %H:%M:%S" >> /etc/awslogs/awslogs.conf
+echo "file = /var/log/cloud-init-output.log" >> /etc/awslogs/awslogs.conf
 echo "log_stream_name = {instance_id}" >> /etc/awslogs/awslogs.conf
 
 # setup ssh key
