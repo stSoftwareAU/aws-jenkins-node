@@ -1,42 +1,8 @@
 #!/bin/bash
 set -e
 
-sed -i -e 's/#root:.*/root: support@stsoftware.com.au/g' /etc/aliases
-
-set +e
-adduser jenkins
-set -e
-mkdir -p /home/jenkins
-usermod --home /home/jenkins jenkins
-runuser -l jenkins /usr/bin/bash -c "/usr/bin/aws configure set default.region ap-southeast-2"
-cp -a /home/ec2-user/.ssh /home/jenkins/
-chown -R jenkins /home/jenkins
-
-amazon-linux-extras install docker
-usermod --gid docker jenkins
-chown -R jenkins:docker /home/jenkins
-
-amazon-linux-extras enable corretto8
 yum update –y
-yum install -y awslogs ntp git jq java-1.8.0-amazon-corretto-devel
-#install postgres 11.6.1
-yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-libs-11.6-1PGDG.rhel6.x86_64.rpm
-yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-11.6-1PGDG.rhel6.x86_64.rpm
-
-#install apache ant
-mkdir -p /tmp
-cd /tmp
-wget http://apache.mirror.serversaustralia.com.au//ant/binaries/apache-ant-1.9.15-bin.tar.gz
-tar -xzf apache-ant-1.9.15-bin.tar.gz
-rm -rf /tmp/apache-ant
-ln -s apache-ant-1.9.15 apache-ant
-#install gwt-2.7.0
-wget http://goo.gl/t7FQSn -O gwt-2.7.0.zip
-unzip gwt-2.7.0.zip
-
-ln -sf /usr/share/zoneinfo/Australia/Sydney /etc/localtime
-#chkconfig ntpd on
-systemctl enable ntpd.service
+yum install -y awslogs
 
 # Set up logs
 sed --in-place -E "s/( *region *=)(.*)/\1 ap-southeast-2/" /etc/awslogs/awscli.conf
@@ -59,6 +25,44 @@ echo "datetime_format = %b %d %H:%M:%S" >> /etc/awslogs/awslogs.conf
 echo "file = /var/log/cloud-init-output.log" >> /etc/awslogs/awslogs.conf
 echo "log_stream_name = {instance_id}" >> /etc/awslogs/awslogs.conf
 
+systemctl restart awslogsd.service
+
+sed -i -e 's/#root:.*/root: support@stsoftware.com.au/g' /etc/aliases
+
+set +e
+adduser jenkins
+set -e
+mkdir -p /home/jenkins
+usermod --home /home/jenkins jenkins
+runuser -l jenkins /usr/bin/bash -c "/usr/bin/aws configure set default.region ap-southeast-2"
+cp -a /home/ec2-user/.ssh /home/jenkins/
+chown -R jenkins /home/jenkins
+
+amazon-linux-extras install docker
+usermod --gid docker jenkins
+chown -R jenkins:docker /home/jenkins
+
+amazon-linux-extras enable corretto8
+yum install -y ntp git jq java-1.8.0-amazon-corretto-devel
+#install postgres 11.6.1
+yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-libs-11.6-1PGDG.rhel6.x86_64.rpm
+yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-11.6-1PGDG.rhel6.x86_64.rpm
+
+#install apache ant
+mkdir -p /tmp
+cd /tmp
+wget http://apache.mirror.serversaustralia.com.au//ant/binaries/apache-ant-1.9.15-bin.tar.gz
+tar -xzf apache-ant-1.9.15-bin.tar.gz
+rm -rf /tmp/apache-ant
+ln -s apache-ant-1.9.15 apache-ant
+#install gwt-2.7.0
+wget http://goo.gl/t7FQSn -O gwt-2.7.0.zip
+unzip gwt-2.7.0.zip
+
+ln -sf /usr/share/zoneinfo/Australia/Sydney /etc/localtime
+#chkconfig ntpd on
+systemctl enable ntpd.service
+
 # setup ssh key
 mkdir -p /home/jenkins/.ssh
 secret_JS=$(aws secretsmanager get-secret-value --secret-id "common_secrets" --region ap-southeast-2)
@@ -74,7 +78,6 @@ echo "${known_hosts}" >> /home/jenkins/.ssh/known_hosts
 chown -R jenkins:docker /home/jenkins/.ssh
 chmod 600 /home/jenkins/.ssh/*
 
-systemctl restart awslogsd.service
 systemctl start docker.service
 
 systemctl status docker
