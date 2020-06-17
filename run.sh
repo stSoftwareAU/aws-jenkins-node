@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 
 yum update –y
 yum install -y awslogs
