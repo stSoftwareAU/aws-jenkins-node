@@ -59,6 +59,9 @@ ln -s apache-ant-1.9.15 apache-ant
 wget http://goo.gl/t7FQSn -O gwt-2.7.0.zip
 unzip gwt-2.7.0.zip
 
+git config --global user.email "service@stsoftware.com.au"
+git config --global user.name "AWS Jenkins"
+
 ln -sf /usr/share/zoneinfo/Australia/Sydney /etc/localtime
 #chkconfig ntpd on
 systemctl enable ntpd.service
