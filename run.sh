@@ -82,5 +82,6 @@ chown -R jenkins:docker /home/jenkins/.ssh
 chmod 600 /home/jenkins/.ssh/*
 
 systemctl start docker.service
+sudo systemctl start deluged
 
 systemctl status docker
