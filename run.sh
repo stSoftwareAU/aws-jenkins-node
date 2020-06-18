@@ -83,4 +83,4 @@ chmod 600 /home/jenkins/.ssh/*
 
 systemctl start docker.service
 
-systemctl status docker
+echo systemctl status docker
