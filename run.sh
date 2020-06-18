@@ -81,6 +81,6 @@ echo "${known_hosts}" >> /home/jenkins/.ssh/known_hosts
 chown -R jenkins:docker /home/jenkins/.ssh
 chmod 600 /home/jenkins/.ssh/*
 
-systemctl start docker.service
+#systemctl start docker.service
 
 echo systemctl status docker
