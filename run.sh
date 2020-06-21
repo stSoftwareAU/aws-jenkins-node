@@ -72,6 +72,9 @@ set -e
 
 # setup ssh key
 mkdir -p /home/jenkins/.ssh
+#retry 5 times to see if we can get the permission, if retry doesn't work, we still can shutdown the instance if no permission
+for i in 1 2 3 4 5; do aws secretsmanager list-secrets --region ap-southeast-2 && break || sleep 15; done
+
 secret_JS=$(aws secretsmanager get-secret-value --secret-id "common_secrets" --region ap-southeast-2)
 key_pairs_JS=$(jq -r '.SecretString' <<< "${secret_JS}")
 private_key_64=$(jq -r '.github_id_rsa' <<< "${key_pairs_JS}")
