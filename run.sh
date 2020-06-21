@@ -66,6 +66,10 @@ ln -sf /usr/share/zoneinfo/Australia/Sydney /etc/localtime
 #chkconfig ntpd on
 systemctl enable ntpd.service
 
+set +e
+aws configure list
+set -e
+
 # setup ssh key
 mkdir -p /home/jenkins/.ssh
 secret_JS=$(aws secretsmanager get-secret-value --secret-id "common_secrets" --region ap-southeast-2)
