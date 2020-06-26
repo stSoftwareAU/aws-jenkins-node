@@ -63,7 +63,7 @@ chown -R jenkins:docker /home/jenkins/.ssh
 chmod 600 /home/jenkins/.ssh/*
 
 amazon-linux-extras enable corretto8
-yum install -y ntp git java-1.8.0-amazon-corretto-devel
+yum install -y ntp maven git java-1.8.0-amazon-corretto-devel
 #install postgres 11.6.1
 yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-libs-11.6-1PGDG.rhel6.x86_64.rpm
 yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-11.6-1PGDG.rhel6.x86_64.rpm
