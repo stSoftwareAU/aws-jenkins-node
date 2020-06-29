@@ -91,7 +91,7 @@ cd /usr/local/bin
 mkdir ffmpeg
 
 cd ffmpeg
-wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-4.3-amd64-static.tar.xz
+for i in 1 2 3 4 5; do wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-4.3-amd64-static.tar.xz && break || sleep 15; done
 tar xvf ffmpeg-4.3-amd64-static.tar.xz
 mv ffmpeg-4.3-amd64-static/ffmpeg .
 
