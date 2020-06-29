@@ -63,7 +63,7 @@ chown -R jenkins:docker /home/jenkins/.ssh
 chmod 600 /home/jenkins/.ssh/*
 
 amazon-linux-extras enable corretto8
-yum install -y ntp maven git java-1.8.0-amazon-corretto-devel
+yum install -y ntp maven git java-1.8.0-amazon-corretto-devel aspell
 #install postgres 11.6.1
 yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-libs-11.6-1PGDG.rhel6.x86_64.rpm
 yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-11.6-1PGDG.rhel6.x86_64.rpm
@@ -85,6 +85,17 @@ su - jenkins -c 'git config --global user.name "AWS Jenkins"'
 ln -sf /usr/share/zoneinfo/Australia/Sydney /etc/localtime
 #chkconfig ntpd on
 systemctl enable ntpd.service
+
+#install ffmpeg
+cd /usr/local/bin
+mkdir ffmpeg
+
+cd ffmpeg
+wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-4.3-amd64-static.tar.xz
+tar xvf ffmpeg-4.3-amd64-static.tar.xz
+mv ffmpeg-4.3-amd64-static/ffmpeg .
+
+ln -s /usr/local/bin/ffmpeg/ffmpeg /usr/bin/ffmpeg
 
 set +e
 aws configure list
