@@ -62,8 +62,12 @@ echo "${known_hosts}" >> /home/jenkins/.ssh/known_hosts
 chown -R jenkins:docker /home/jenkins/.ssh
 chmod 600 /home/jenkins/.ssh/*
 
-amazon-linux-extras enable corretto8
-yum install -y ntp maven git java-1.8.0-amazon-corretto-devel aspell
+#install java8
+#amazon-linux-extras enable corretto8
+#yum install -y ntp maven git java-1.8.0-amazon-corretto-devel aspell
+wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.rpm
+yum install -y jdk-8u141-linux-x64.rpm
+
 #install postgres 11.6.1
 yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-libs-11.6-1PGDG.rhel6.x86_64.rpm
 yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-11.6-1PGDG.rhel6.x86_64.rpm
