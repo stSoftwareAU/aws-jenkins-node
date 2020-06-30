@@ -62,6 +62,8 @@ echo "${known_hosts}" >> /home/jenkins/.ssh/known_hosts
 chown -R jenkins:docker /home/jenkins/.ssh
 chmod 600 /home/jenkins/.ssh/*
 
+yum install -y ntp maven git aspell
+
 #install java8
 #amazon-linux-extras enable corretto8
 #yum install -y ntp maven git java-1.8.0-amazon-corretto-devel aspell
