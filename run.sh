@@ -119,3 +119,38 @@ sudo systemctl start docker.service
 #sudo systemctl start deluged
 
 systemctl status docker
+
+#setup sftp
+user=test
+passw=Ujh7^i9sa
+userhome="/home/${user}"
+userdata="${userhome}/data"
+sshd_config='/etc/ssh/sshd_config'
+
+groupadd sftp_users
+adduser --shell /bin/bash --home /home/${user} ${user}
+
+usermod -g sftp_users ${user}
+echo "${user}:${passw}" | chpasswd
+
+mkdir -p /data/${user}
+chmod 701 /data
+mkdir -p /data/${user}/upload
+chown -R root:sftp_users /data/${user}
+chown -R ${user}:sftp_users /data/${user}/upload
+
+tab=$'\t'
+cat <<EOF >>${sshd_config}
+## START_SFTP_CONFIG ##
+Match Group sftp_users
+${tab}ChrootDirectory /data/%u
+${tab}X11Forwarding no
+${tab}PermitTunnel no
+${tab}AllowAgentForwarding no
+${tab}AllowTcpForwarding no
+${tab}ForceCommand internal-sftp -d /upload
+${tab}PasswordAuthentication yes
+## END_SFTP_CONFIG ##
+EOF
+
+systemctl restart sshd
