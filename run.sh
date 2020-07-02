@@ -115,11 +115,6 @@ set +e
 aws configure list
 set -e
 
-sudo systemctl start docker.service
-#sudo systemctl start deluged
-
-systemctl status docker
-
 #setup sftp
 user=test
 passw=Ujh7^i9sa
@@ -152,5 +147,11 @@ ${tab}ForceCommand internal-sftp -d /upload
 ${tab}PasswordAuthentication yes
 ## END_SFTP_CONFIG ##
 EOF
+
+#start docker
+sudo systemctl start docker.service
+#sudo systemctl start deluged
+
+systemctl status docker
 
 systemctl restart sshd
