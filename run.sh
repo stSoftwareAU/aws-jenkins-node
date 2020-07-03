@@ -41,6 +41,7 @@ chown -R jenkins /home/jenkins
 amazon-linux-extras install docker
 usermod --gid docker jenkins
 chown -R jenkins:docker /home/jenkins
+sudo systemctl start docker.service
 
 yum install -y jq
 
@@ -149,7 +150,7 @@ ${tab}PasswordAuthentication yes
 EOF
 
 #start docker
-sudo systemctl start docker.service
+#sudo systemctl start docker.service
 #sudo systemctl start deluged
 
 systemctl status docker
