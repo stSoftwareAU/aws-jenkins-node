@@ -118,7 +118,7 @@ set -e
 
 #setup sftp
 user=test
-passw=Ujh7^i9sa
+passw=Ujh76i9sa
 userhome="/home/${user}"
 userdata="${userhome}/data"
 sshd_config='/etc/ssh/sshd_config'
