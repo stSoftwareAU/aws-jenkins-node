@@ -104,6 +104,9 @@ mv ffmpeg-4.3-amd64-static/ffmpeg .
 
 ln -s /usr/local/bin/ffmpeg/ffmpeg /usr/bin/ffmpeg
 
+#install c compiler for litmus test
+yum groupinstall -y "Development Tools"
+
 #install aspell language pack
 wget https://ftp.gnu.org/gnu/aspell/dict/en/aspell6-en-2019.10.06-0.tar.bz2
 tar xjf aspell6-en-2019.10.06-0.tar.bz2
