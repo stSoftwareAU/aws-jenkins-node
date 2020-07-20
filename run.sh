@@ -160,10 +160,11 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 sudo yum install -y ./google-chrome-stable_current_*.rpm
 google-chrome --version
 
-wget http://ftp.mozilla.org/pub/firefox/releases/76.0/linux-x86_64/en-US/firefox-76.0.tar.bz2
-tar xvjf firefox-76.0.tar.bz2
+set -ex
+sudo wget -O- "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US" | tar -jx -C /usr/local/
+echo "exclude=firefox" >> /etc/dnf/dnf.conf
 sudo ln -s /usr/local/firefox/firefox /usr/bin/firefox
-
+set -e
 
 
 systemctl status docker
