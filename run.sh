@@ -164,8 +164,10 @@ set -ex
 sudo wget -O- "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US" | tar -jx -C /usr/local/
 echo "exclude=firefox" >> /etc/dnf/dnf.conf
 sudo ln -s /usr/local/firefox/firefox /usr/bin/firefox
-set -e
 
+
+bash SetupAWS.sh
+set -e
 
 systemctl status docker
 
