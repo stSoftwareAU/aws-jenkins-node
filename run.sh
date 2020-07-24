@@ -41,7 +41,7 @@ chown -R jenkins /home/jenkins
 amazon-linux-extras install docker
 usermod --gid docker jenkins
 chown -R jenkins:docker /home/jenkins
-sudo systemctl start docker.service
+systemctl start docker.service
 
 yum install -y jq
 
@@ -157,13 +157,14 @@ EOF
 #sudo systemctl start deluged
 
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
-sudo yum install -y ./google-chrome-stable_current_*.rpm
+yum install -y ./google-chrome-stable_current_*.rpm
 google-chrome --version
 
 set -ex
-sudo wget -O- "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US" | tar -jx -C /usr/local/
+wget -O- "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US" | tar -jx -C /usr/local/
+mkdir -p /etc/dnf/
 echo "exclude=firefox" >> /etc/dnf/dnf.conf
-sudo ln -s /usr/local/firefox/firefox /usr/bin/firefox
+ln -s /usr/local/firefox/firefox /usr/bin/firefox
 
 
 bash SetupAWS.sh
