@@ -40,11 +40,11 @@ ldconfig
 function finish()
 {
      cd $workpath
-     wget -r --no-parent --reject "index.html*" -nH --cut-dirs=7 http://download.cdn.mozilla.net/pub/mozilla.org/firefox/releases/latest/linux-x86_64/en-US/
-     tar xvf firefox*
+     wget -O- "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US" | tar -jx -C /usr/local/
      cd bin
+     rm -f firefox
      ln -s ../firefox/firefox
-     ldconfig
+     #ldconfig
 }
 
 function install()
