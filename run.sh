@@ -160,6 +160,13 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 yum install -y ./google-chrome-stable_current_*.rpm
 google-chrome --version
 
+#install phantomjs
+rm -f /usr/bin/phantomjs
+rm -f /usr/local/phantomjs
+mkdir -p /usr/local/phantomjs
+wget -O- "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" | tar -jx --directory /usr/local/phantomjs --strip-components 1
+ln -s /usr/local/phantomjs/bin/phantomjs /usr/bin/phantomjs
+
 # moved to run-firefox.sh
 #set -ex
 #wget -O- "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US" | tar -jx -C /usr/local/
