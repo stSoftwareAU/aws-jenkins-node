@@ -167,7 +167,7 @@ google-chrome --version
 #echo "exclude=firefox" >> /etc/dnf/dnf.conf
 #ln -s /usr/local/firefox/firefox /usr/bin/firefox
 
-
+set +e
 bash SetupAWS.sh
 set -e
 
