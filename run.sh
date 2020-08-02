@@ -71,6 +71,11 @@ yum install -y ntp maven git aspell
 wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.rpm
 yum install -y jdk-8u141-linux-x64.rpm
 
+#install Chrome
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+yum install -y ./google-chrome-stable_current_*.rpm
+google-chrome --version
+
 #install postgres 11.6.1
 yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-libs-11.6-1PGDG.rhel6.x86_64.rpm
 yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-11.6-1PGDG.rhel6.x86_64.rpm
@@ -156,9 +161,9 @@ EOF
 #sudo systemctl start docker.service
 #sudo systemctl start deluged
 
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
-yum install -y ./google-chrome-stable_current_*.rpm
-google-chrome --version
+#wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+#yum install -y ./google-chrome-stable_current_*.rpm
+#google-chrome --version
 
 #install phantomjs
 rm -f /usr/bin/phantomjs
