@@ -179,6 +179,11 @@ ln -s /usr/local/phantomjs/bin/phantomjs /usr/bin/phantomjs
 #echo "exclude=firefox" >> /etc/dnf/dnf.conf
 #ln -s /usr/local/firefox/firefox /usr/bin/firefox
 
+#check jenkins git config should be set
+set +e
+cat /home/jenkins/.gitconfig
+set -e
+
 set +e
 bash SetupAWS.sh
 set -e
