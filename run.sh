@@ -101,11 +101,11 @@ systemctl enable ntpd.service
 #install ffmpeg
 cd /usr/local/bin
 mkdir ffmpeg
-
 cd ffmpeg
-for i in 1 2 3 4 5; do wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-4.3-amd64-static.tar.xz && break || sleep 15; done
-tar xvf ffmpeg-4.3-amd64-static.tar.xz
-mv ffmpeg-4.3-amd64-static/ffmpeg .
+for i in 1 2 3 4 5; do wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz && break || sleep 15; done
+mkdir -p ffmpeg-release-amd64-static
+tar xvf ffmpeg-release-amd64-static.tar.xz -C ffmpeg-release-amd64-static --strip-components=1
+mv ffmpeg-release-amd64-static/ffmpeg .
 
 ln -s /usr/local/bin/ffmpeg/ffmpeg /usr/bin/ffmpeg
 
