@@ -76,6 +76,13 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 yum install -y ./google-chrome-stable_current_*.rpm
 google-chrome --version
 
+
+
+#install firefox 
+sudo run-firefox.sh
+firefox --version
+
+
 #install postgres 11.6.1
 yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-libs-11.6-1PGDG.rhel6.x86_64.rpm
 yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-11.6-1PGDG.rhel6.x86_64.rpm
