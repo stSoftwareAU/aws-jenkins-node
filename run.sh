@@ -79,8 +79,8 @@ google-chrome --version
 
 
 #install firefox 
-sudo run-firefox.sh
-firefox --version
+#sudo run-firefox.sh
+#firefox --version
 
 
 #install postgres 11.6.1
