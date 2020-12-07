@@ -1,6 +1,42 @@
 #!/bin/bash
 set -ex
 
+function retry {
+  local max_attempts=${ATTEMPTS-6} ##ATTEMPTS (default 6)
+  local timeout=${TIMEOUT-1}       ##TIMEOUT in seconds (default 1.) doubles on each attempt
+  local attempt=0
+  local exitCode=0
+
+  set +e
+  while [[ $attempt < $max_attempts ]]
+  do
+    "$@" && { 
+      exitCode=0
+      break 
+    }
+    exitCode=$?
+
+    if [[ $exitCode == 0 ]]
+    then
+      break
+    fi
+
+    echo "Failure! Retrying in $timeout.." 1>&2
+    sleep $timeout
+    attempt=$(( attempt + 1 ))
+    timeout=$(( timeout * 2 ))
+  done
+  set -e
+
+  if [[ $exitCode != 0 ]]
+  then
+    echo "You've failed me for the last time! ($@)" 1>&2
+  fi
+
+  return $exitCode
+}
+
+
 yum update –y
 yum install -y awslogs
 
@@ -103,7 +139,7 @@ su - jenkins -c 'git config --global user.name "AWS Jenkins"'
 
 ln -sf /usr/share/zoneinfo/Australia/Sydney /etc/localtime
 #chkconfig ntpd on
-systemctl enable ntpd.service
+retry systemctl enable ntpd.service
 
 #install ffmpeg
 cd /usr/local/bin
