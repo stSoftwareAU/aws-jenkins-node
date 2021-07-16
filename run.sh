@@ -124,12 +124,13 @@ yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x8
 yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-11.6-1PGDG.rhel6.x86_64.rpm
 
 #install apache ant
+antversion=1.9.16
 mkdir -p /tmp
 cd /tmp
-wget http://apache.mirror.serversaustralia.com.au//ant/binaries/apache-ant-1.9.15-bin.tar.gz
-tar -xzf apache-ant-1.9.15-bin.tar.gz
+wget https://downloads.apache.org//ant/binaries/apache-ant-${antversion}-bin.tar.gz
+tar -xzf apache-ant-${antversion}-bin.tar.gz
 rm -rf /tmp/apache-ant
-ln -s apache-ant-1.9.15 apache-ant
+ln -s apache-ant-${antversion} apache-ant
 #install gwt-2.7.0
 wget http://goo.gl/t7FQSn -O gwt-2.7.0.zip
 unzip gwt-2.7.0.zip
