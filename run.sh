@@ -105,7 +105,7 @@ yum install -y ntp maven git aspell
 #amazon-linux-extras enable corretto8
 #yum install -y ntp maven git java-1.8.0-amazon-corretto-devel aspell
 
-wget --no-check-certificate --no-cookies --header -q "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.rpm
+wget --no-check-certificate --no-cookies --header --quiet "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.rpm
 
 yum install -y jdk-8u141-linux-x64.rpm
 
