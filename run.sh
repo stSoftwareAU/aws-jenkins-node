@@ -37,7 +37,7 @@ function retry {
 }
 
 
-yum update –y
+yum update -y
 yum install -y awslogs
 
 # Set up logs
