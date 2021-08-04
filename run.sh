@@ -112,8 +112,10 @@ yum install -y jdk-8u141-linux-x64.rpm
 set -e
 
 #install Chrome
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm --quiet
+set +e
 yum install -y ./google-chrome-stable_current_*.rpm
+set -e
 google-chrome --version
 
 
