@@ -243,3 +243,6 @@ set -e
 systemctl status docker
 
 systemctl restart sshd
+
+echo "DONE"
+
