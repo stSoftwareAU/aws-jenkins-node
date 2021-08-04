@@ -126,8 +126,10 @@ google-chrome --version
 
 
 #install postgres 11.6.1
+set +e
 yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-libs-11.6-1PGDG.rhel6.x86_64.rpm
 yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-6-x86_64/postgresql11-11.6-1PGDG.rhel6.x86_64.rpm
+set -e
 
 #install apache ant
 antversion=1.9.16
