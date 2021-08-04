@@ -238,11 +238,11 @@ set -e
 
 set +e
 bash SetupAWS.sh
-set -e
 
 systemctl status docker
 
 systemctl restart sshd
 
+set -e
 echo "DONE"
 
