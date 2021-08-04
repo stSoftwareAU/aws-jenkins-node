@@ -135,12 +135,12 @@ set -e
 antversion=1.9.16
 mkdir -p /tmp
 cd /tmp
-wget https://downloads.apache.org//ant/binaries/apache-ant-${antversion}-bin.tar.gz
+wget https://downloads.apache.org//ant/binaries/apache-ant-${antversion}-bin.tar.gz --quiet
 tar -xzf apache-ant-${antversion}-bin.tar.gz
 rm -rf /tmp/apache-ant
 ln -s apache-ant-${antversion} apache-ant
 #install gwt-2.7.0
-wget http://goo.gl/t7FQSn -O gwt-2.7.0.zip
+wget http://goo.gl/t7FQSn -O gwt-2.7.0.zip --quiet
 unzip gwt-2.7.0.zip
 
 su - jenkins -c 'git config --global user.email "service@stsoftware.com.au"'
@@ -165,7 +165,7 @@ ln -s /usr/local/bin/ffmpeg/ffmpeg /usr/bin/ffmpeg
 yum groupinstall -y "Development Tools"
 
 #install aspell language pack
-wget https://ftp.gnu.org/gnu/aspell/dict/en/aspell6-en-2019.10.06-0.tar.bz2
+wget https://ftp.gnu.org/gnu/aspell/dict/en/aspell6-en-2019.10.06-0.tar.bz2 --quiet
 tar xjf aspell6-en-2019.10.06-0.tar.bz2
 cd aspell6-en-2019.10.06-0/
 ./configure
@@ -221,7 +221,7 @@ EOF
 rm -f /usr/bin/phantomjs
 rm -f /usr/local/phantomjs
 mkdir -p /usr/local/phantomjs
-wget -O- "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" | tar -jx --directory /usr/local/phantomjs --strip-components 1
+wget -O- "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" | tar -jx --directory /usr/local/phantomjs --strip-components 1 --quiet
 ln -s /usr/local/phantomjs/bin/phantomjs /usr/bin/phantomjs
 
 # moved to run-firefox.sh
