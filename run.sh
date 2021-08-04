@@ -244,5 +244,6 @@ systemctl status docker
 systemctl restart sshd
 
 set -e
+sleep 10m
 echo "DONE"
 
