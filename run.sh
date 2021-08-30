@@ -195,6 +195,10 @@ mkdir -p /data/${user}/upload
 chown -R root:sftp_users /data/${user}
 chown -R ${user}:sftp_users /data/${user}/upload
 
+set +e
+cat ${sshd_config}
+set -e
+
 tab=$'\t'
 cat <<EOF >>${sshd_config}
 ## START_SFTP_CONFIG ##
@@ -208,6 +212,11 @@ ${tab}ForceCommand internal-sftp -d /upload
 ${tab}PasswordAuthentication yes
 ## END_SFTP_CONFIG ##
 EOF
+
+set +e
+cat ${sshd_config}
+set -e
+
 
 #start docker
 #sudo systemctl start docker.service
@@ -237,11 +246,21 @@ cat /home/jenkins/.gitconfig
 set -e
 
 set +e
+cat ${sshd_config}
+set -e
+
+
+set +e
 bash SetupAWS.sh
 
 systemctl status docker
 
 systemctl restart sshd
+
+set +e
+cat ${sshd_config}
+set -e
+
 
 set -e
 
