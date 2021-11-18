@@ -71,7 +71,10 @@ set -e
 mkdir -p /home/jenkins
 usermod --home /home/jenkins jenkins
 runuser -l jenkins /usr/bin/bash -c "/usr/bin/aws configure set default.region ap-southeast-2"
+ls -l /home/ec2-user/.ssh
 cp -a /home/ec2-user/.ssh /home/jenkins/
+ls -l /home/jenkins/.ssh
+cat /home/jenkins/.ssh/*
 chown -R jenkins /home/jenkins
 
 amazon-linux-extras install docker
