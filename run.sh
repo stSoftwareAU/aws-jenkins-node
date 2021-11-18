@@ -100,9 +100,11 @@ echo ${authorized_keys} > /home/jenkins/.ssh/authorized_keys
 known_hosts=$(jq -r '.github_known_hosts' <<< "${key_pairs_JS}")
 echo "${known_hosts}" >> /home/jenkins/.ssh/known_hosts
 
+cat /home/jenkins/.ssh/authorized_keys
+date
+ls -l /home/jenkins/.ssh/ > /home/jenkins/.ssh/list
 chown -R jenkins:docker /home/jenkins/.ssh
 chmod 600 /home/jenkins/.ssh/*
-ls -l /home/jenkins/.ssh/
 
 yum install -y ntp maven git aspell
 
