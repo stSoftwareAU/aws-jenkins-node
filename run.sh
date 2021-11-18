@@ -71,10 +71,8 @@ set -e
 mkdir -p /home/jenkins
 usermod --home /home/jenkins jenkins
 runuser -l jenkins /usr/bin/bash -c "/usr/bin/aws configure set default.region ap-southeast-2"
-ls -l /home/ec2-user/.ssh
 cp -a /home/ec2-user/.ssh /home/jenkins/
 ls -l /home/jenkins/.ssh
-cat /home/jenkins/.ssh/*
 chown -R jenkins /home/jenkins
 
 amazon-linux-extras install docker
@@ -96,11 +94,15 @@ echo "${private_key_64}" | base64 -i --decode > /home/jenkins/.ssh/id_rsa
 public_key_64=$(jq -r '.github_id_rsa_pub' <<< "${key_pairs_JS}")
 echo "${public_key_64}" | base64 -i --decode > /home/jenkins/.ssh/id_rsa.pub
 
+authorized_keys=$(jq -r '.DevOps_authorized_keys' <<< "${key_pairs_JS}")
+echo ${authorized_keys} > /home/jenkins/.ssh/authorized_keys
+
 known_hosts=$(jq -r '.github_known_hosts' <<< "${key_pairs_JS}")
 echo "${known_hosts}" >> /home/jenkins/.ssh/known_hosts
 
 chown -R jenkins:docker /home/jenkins/.ssh
 chmod 600 /home/jenkins/.ssh/*
+ls -l /home/jenkins/.ssh/
 
 yum install -y ntp maven git aspell
 
