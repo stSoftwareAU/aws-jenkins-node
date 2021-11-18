@@ -72,7 +72,6 @@ mkdir -p /home/jenkins
 usermod --home /home/jenkins jenkins
 runuser -l jenkins /usr/bin/bash -c "/usr/bin/aws configure set default.region ap-southeast-2"
 cp -a /home/ec2-user/.ssh /home/jenkins/
-ls -l /home/jenkins/.ssh
 chown -R jenkins /home/jenkins
 
 amazon-linux-extras install docker
@@ -100,13 +99,12 @@ echo ${authorized_keys} > /home/jenkins/.ssh/authorized_keys
 known_hosts=$(jq -r '.github_known_hosts' <<< "${key_pairs_JS}")
 echo "${known_hosts}" >> /home/jenkins/.ssh/known_hosts
 
-cat /home/jenkins/.ssh/authorized_keys
-date
 ls -l /home/jenkins/.ssh/ > /home/jenkins/.ssh/list
 chown -R jenkins:docker /home/jenkins/.ssh
 chmod 600 /home/jenkins/.ssh/*
 
 yum install -y ntp maven git aspell
+ls -l /home/jenkins/.ssh/ > /home/jenkins/.ssh/list2
 
 #install java8
 #amazon-linux-extras enable corretto8
@@ -183,6 +181,8 @@ set +e
 aws configure list
 set -e
 
+ls -l /home/jenkins/.ssh/ > /home/jenkins/.ssh/list3
+
 #setup sftp
 user=test
 passw=Ujh76i9sa
@@ -245,6 +245,7 @@ set +e
 cat /home/jenkins/.gitconfig
 set -e
 
+ls -l /home/jenkins/.ssh/ > /home/jenkins/.ssh/list4
 
 set +e
 bash SetupAWS.sh
@@ -256,3 +257,4 @@ systemctl restart sshd
 
 set -e
 
+ls -l /home/jenkins/.ssh/ > /home/jenkins/.ssh/list5
