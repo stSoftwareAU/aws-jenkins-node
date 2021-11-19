@@ -17,6 +17,8 @@ echo "setup authorized_keys"
 secret_JS=$(aws secretsmanager get-secret-value --secret-id "common_secrets" --region ap-southeast-2)
 authorized_keys=$(jq -r '.DevOps_authorized_keys' <<< "${key_pairs_JS}")
 echo ${authorized_keys} > /home/jenkins/.ssh/authorized_keys
+set -x
+chown -R jenkins:docker /home/jenkins/.ssh
 chmod 600 /home/jenkins/.ssh/*
 
 echo "finished running node-startup.sh"
