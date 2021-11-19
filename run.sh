@@ -71,7 +71,7 @@ set -e
 mkdir -p /home/jenkins
 usermod --home /home/jenkins jenkins
 runuser -l jenkins /usr/bin/bash -c "/usr/bin/aws configure set default.region ap-southeast-2"
-cp -a /home/ec2-user/.ssh /home/jenkins/
+#cp -a /home/ec2-user/.ssh /home/jenkins/
 chown -R jenkins /home/jenkins
 
 amazon-linux-extras install docker
@@ -81,30 +81,7 @@ systemctl start docker.service
 
 yum install -y jq
 
-# setup ssh key
-mkdir -p /home/jenkins/.ssh
-#retry 5 times to see if we can get the permission, if retry doesn't work, we still can shutdown the instance if no permission
-for i in 1 2 3 4 5; do aws secretsmanager list-secrets --region ap-southeast-2 && break || sleep 15; done
-
-secret_JS=$(aws secretsmanager get-secret-value --secret-id "common_secrets" --region ap-southeast-2)
-key_pairs_JS=$(jq -r '.SecretString' <<< "${secret_JS}")
-private_key_64=$(jq -r '.github_id_rsa' <<< "${key_pairs_JS}")
-echo "${private_key_64}" | base64 -i --decode > /home/jenkins/.ssh/id_rsa
-public_key_64=$(jq -r '.github_id_rsa_pub' <<< "${key_pairs_JS}")
-echo "${public_key_64}" | base64 -i --decode > /home/jenkins/.ssh/id_rsa.pub
-
-authorized_keys=$(jq -r '.DevOps_authorized_keys' <<< "${key_pairs_JS}")
-echo ${authorized_keys} > /home/jenkins/.ssh/authorized_keys
-
-known_hosts=$(jq -r '.github_known_hosts' <<< "${key_pairs_JS}")
-echo "${known_hosts}" >> /home/jenkins/.ssh/known_hosts
-
-ls -l /home/jenkins/.ssh/ > /home/jenkins/.ssh/list
-chown -R jenkins:docker /home/jenkins/.ssh
-chmod 600 /home/jenkins/.ssh/*
-
 yum install -y ntp maven git aspell
-ls -l /home/jenkins/.ssh/ > /home/jenkins/.ssh/list2
 
 #install java8
 #amazon-linux-extras enable corretto8
@@ -122,8 +99,6 @@ set +e
 yum install -y ./google-chrome-stable_current_*.rpm
 set -e
 google-chrome --version
-
-
 
 #install firefox 
 #sudo run-firefox.sh
@@ -180,8 +155,6 @@ make install
 set +e
 aws configure list
 set -e
-
-ls -l /home/jenkins/.ssh/ > /home/jenkins/.ssh/list3
 
 #setup sftp
 user=test
@@ -245,16 +218,8 @@ set +e
 cat /home/jenkins/.gitconfig
 set -e
 
-ls -l /home/jenkins/.ssh/ > /home/jenkins/.ssh/list4
-
 set +e
-bash SetupAWS.sh
-
-systemctl status docker
-
-systemctl restart sshd
-
-
+#bash SetupAWS.sh
+#systemctl status docker
+#systemctl restart sshd
 set -e
-
-ls -l /home/jenkins/.ssh/ > /home/jenkins/.ssh/list5
