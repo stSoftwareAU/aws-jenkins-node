@@ -12,9 +12,10 @@ sudo systemctl restart awslogsd.service
 sed -i "/^[^#]*PasswordAuthentication/c\PasswordAuthentication yes" /etc/ssh/sshd_config
 sudo systemctl restart sshd
 
-set +x
+#set +x
 echo "setup authorized_keys"
 secret_JS=$(aws secretsmanager get-secret-value --secret-id "common_secrets" --region ap-southeast-2)
+key_pairs_JS=$(jq -r '.SecretString' <<< "${secret_JS}")
 authorized_keys=$(jq -r '.DevOps_authorized_keys' <<< "${key_pairs_JS}")
 echo ${authorized_keys} > /home/jenkins/.ssh/authorized_keys
 set -x
