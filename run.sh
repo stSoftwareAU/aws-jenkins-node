@@ -93,6 +93,9 @@ set +e
 yum install -y jdk-8u141-linux-x64.rpm
 set -e
 
+alternatives --set java /usr/java/jdk1.8.0_141/jre/bin/java
+alternatives --set javac /usr/java/jdk1.8.0_141/bin/javac
+
 #install Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm --quiet
 set +e
