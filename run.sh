@@ -98,6 +98,7 @@ yum install -y ntp maven git aspell
 
 yum install -y java-1.8.0-openjdk-devel
 alternatives --set java java-1.8.0-openjdk.x86_64
+alternatives --set javac java-1.8.0-openjdk.x86_64
 
 #install Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm --quiet
