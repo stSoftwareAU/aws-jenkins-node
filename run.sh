@@ -74,6 +74,10 @@ runuser -l jenkins /usr/bin/bash -c "/usr/bin/aws configure set default.region a
 #cp -a /home/ec2-user/.ssh /home/jenkins/
 chown -R jenkins /home/jenkins
 
+#create /data directory for APA testing
+mkdir /data
+chown jenkins /data
+
 amazon-linux-extras install -y docker
 usermod --gid docker jenkins
 chown -R jenkins:docker /home/jenkins
