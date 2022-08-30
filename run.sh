@@ -74,10 +74,6 @@ runuser -l jenkins /usr/bin/bash -c "/usr/bin/aws configure set default.region a
 #cp -a /home/ec2-user/.ssh /home/jenkins/
 chown -R jenkins /home/jenkins
 
-#create /data directory for APA testing
-mkdir /data
-chown jenkins /data
-
 amazon-linux-extras install -y docker
 usermod --gid docker jenkins
 chown -R jenkins:docker /home/jenkins
@@ -186,6 +182,9 @@ mkdir -p /data/${user}/upload
 chown -R root:sftp_users /data/${user}
 chown -R ${user}:sftp_users /data/${user}/upload
 
+#create /data directory for APA testing
+mkdir /data/apaftp
+chown jenkins /data/apaftp
 
 tab=$'\t'
 cat <<EOF >>${sshd_config}
