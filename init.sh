@@ -51,7 +51,7 @@ wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-
 yum install -y jdk-8u141-linux-x64.rpm
 
 
-yum install -y jq
+yum install -y jq git
 
 # setup ssh key
 mkdir -p /home/jenkins/.ssh
@@ -71,7 +71,7 @@ echo "${known_hosts}" >> /home/jenkins/.ssh/known_hosts
 chown -R jenkins:docker /home/jenkins/.ssh
 chmod 600 /home/jenkins/.ssh/*
 
-yum install -y ntp git
+yum install -y ntp
 
 su - jenkins -c 'git config --global user.email "service@stsoftware.com.au"'
 su - jenkins -c 'git config --global user.name "AWS Jenkins"'
