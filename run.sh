@@ -118,6 +118,7 @@ yum install -y nodejs
 #install selenium-side-runner and chrome driver
 npm install -g selenium-side-runner
 npm install -g chromedriver
+npm install -g jest-junit
 
 #install postgres 11.6.1
 set +e
