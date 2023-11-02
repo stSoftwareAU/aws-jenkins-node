@@ -112,8 +112,13 @@ google-chrome --version
 #firefox --version
 
 #install node 16
+###### this doesn't work after nodejs 16 is deprecated ######
 curl -sL https://rpm.nodesource.com/setup_16.x | bash -
 yum install -y nodejs
+####### Use new script to install the nodejs 16 #############
+yum install https://rpm.nodesource.com/pub_16.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm -y
+yum install nodejs -y --setopt=nodesource-nodejs.module_hotfixes=1
+# end install nodejs 16
 
 #install selenium-side-runner and chrome driver
 npm install -g selenium-side-runner
