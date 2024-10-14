@@ -100,6 +100,15 @@ yum install -y java-1.8.0-openjdk-devel
 alternatives --set java java-1.8.0-openjdk.x86_64
 alternatives --set javac java-1.8.0-openjdk.x86_64
 
+#install C and build the CUPS 2.4.11 for google-chrome
+yum group install -y "Development Tools"
+yum install -y atk atk-devel at-spi2-atk at-spi2-core cairo cairo-devel gtk3 gtk3-devel pango pango-devel vulkan
+wget https://github.com/OpenPrinting/cups/releases/download/v2.4.11/cups-2.4.11-source.tar.gz
+tar -xzf cups-2.4.11-source.tar.gz
+cd cups-2.4.11
+./configure --with-tls=no && make -j8 && make install
+cd ..
+
 #install Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm --quiet
 set +e
