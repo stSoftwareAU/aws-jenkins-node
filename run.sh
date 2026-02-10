@@ -155,7 +155,7 @@ tar -xzf apache-ant-${antversion}-bin.tar.gz
 rm -rf /tmp/apache-ant
 ln -s apache-ant-${antversion} apache-ant
 #install gwt-2.7.0
-wget http://goo.gl/t7FQSn -O gwt-2.7.0.zip --quiet
+wget https://github.com/gwtproject/gwt/releases/download/2.7.0/gwt-2.7.0.zip -O gwt-2.7.0.zip --quiet
 unzip gwt-2.7.0.zip
 
 su - jenkins -c 'git config --global user.email "service@stsoftware.com.au"'
