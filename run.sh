@@ -131,7 +131,13 @@ yum install nodejs -y --setopt=nodesource-nodejs.module_hotfixes=1
 
 #install selenium-side-runner and chrome driver
 npm install -g selenium-side-runner
-npm install -g chromedriver
+#match the chromedriver version with the installed chrome
+DETECT_CHROMEDRIVER_VERSION=true npm install -g chromedriver
+echo "Installed chrome version:"
+google-chrome --version
+echo "Installed chrome driver version:"
+chromedriver --version
+
 npm install -g jest-junit
 
 #install postgres 11.6.1
